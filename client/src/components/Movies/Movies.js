@@ -25,7 +25,6 @@ class Movies extends React.Component {
         axios
         .get(`http://www.omdbapi.com/?s=${this.state.query}&type=movie&${API_KEY}`)
         .then(response => {
-            console.log(response.data.Search)
             this.setState({
                 movie: response.data.Search
             })
@@ -37,9 +36,11 @@ class Movies extends React.Component {
 
     addMovie = (event) => {
         event.preventDefault();
+        console.log(this.state.movie)
         this.setState({
             //currently adds an item to the end of the nominations array but will replace content with the new item, rather than appending this
-            nominations: [
+            nominations: 
+            [
                 {
                     'title': this.state.movie[0].Title,
                     'year': this.state.movie[0].Year
@@ -47,7 +48,7 @@ class Movies extends React.Component {
             ]
         })
     }
-
+    
     removeMovie = (event) => {
         event.preventDefault();
         //currently clears the nominations array but will need to be set up to clear only the selected item
@@ -59,33 +60,38 @@ class Movies extends React.Component {
     render() {
         return (
             <>
-            <h1>The Shoppies</h1>
 
-            <section>
-                <label>Movie Title</label>
-                <input type='text' onChange={this.handleInput}/>
-                <button onClick={this.submitInput}>Search</button>
-            </section>
-            
-            <section>
-                <h2>Results for {this.state.query}</h2>
-                {this.state.movie.map(movie => 
+            <main className='main'>
+                <h1 className='main__title'>THE SHOPPIES</h1>
+
+                <section className='search__container'>
+                    <label className='search__label'>Find A Movie</label>
+                    <input type='text' onChange={this.handleInput} className='search__search'/>
+                    <button onClick={this.submitInput} className='search__btn'>Search</button>
+                </section>
+
+                <section className='results__container'>
+                    <h3 className='results__title'>Results for {this.state.query}</h3>
+                    {this.state.movie.map(movie => 
                     <>
                     <MovieList movie={movie} key={movie.imdbID}/>
-                    <button onClick={this.addMovie}>Nominate</button>
+                    <button onClick={this.addMovie} className='results__btn'>Nominate</button>
                     </>
-                )} 
-            </section>
+                    )} 
+                </section>
 
-            <section>
-                <h2>Nominations</h2>
-                {this.state.nominations.map(nominations =>
-                    <>
-                    <Nominations nominations={nominations}/>
-                    <button onClick={this.removeMovie}>Remove Nomination</button>
-                    </>
-                )}
-            </section>
+                <section className='nominations__container'>
+                    <h2 className='nominations__title'>Nominations</h2>
+                    {this.state.nominations.map(nominations =>
+                        <>
+                        <Nominations nominations={nominations}/>
+                        
+                        <button onClick={this.removeMovie} className='nominations__btn' >Remove</button>
+                        </>
+                    )}
+                </section>
+            </main>
+ 
             </>
         )
     }

@@ -1,0 +1,44 @@
+
+.search {
+    @include main-font;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__label {
+        font-size: 0.9rem;
+        @include main-font;
+
+        @include tablet {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__search {
+        border-radius: 20px;
+        border: 1px solid;
+        margin: 0.5rem 0 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #8292c4;
+        border: 1px solid #586db0;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        color: #FFF;
+
+        @include tablet {
+            padding: 1rem 1.5rem;
+            font-size: 1.5rem;
+            border-radius: 30px;
+        }
+    }
+
+    &__btn {
+        @include btn;
+        width: 5rem;
+
+        @include tablet {
+            @include tablet-btn;
+        }
+    }
+}

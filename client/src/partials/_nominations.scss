@@ -1,0 +1,33 @@
+.nominations {
+
+    &__title {
+        padding: 2rem 0 1rem;
+        @include heading;
+        font-size: 2rem;
+
+    }
+
+    &__list {
+        padding-left: 1rem;
+
+    }
+
+    &__list-item {
+        padding: 0.5rem 0;
+        @include main-font;
+        font-weight: bold;
+        list-style: nu;
+
+
+    }
+
+    &__btn {
+        @include btn;
+
+        @include tablet {
+            @include tablet-btn;
+        }
+
+
+    }
+}

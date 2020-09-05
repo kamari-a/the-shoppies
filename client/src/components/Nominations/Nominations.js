@@ -2,9 +2,9 @@ import React from 'react';
 
 const Nominations = (props) => {
     return (
-        <ul>
-            <li>{props.nominations.title} ({props.nominations.year})</li>
-        </ul>
+        <ol className='nominations__list'>
+            <li className='nominations__list-item'>{props.nominations.title} ({props.nominations.year})</li>
+        </ol>
     )
 }
 
