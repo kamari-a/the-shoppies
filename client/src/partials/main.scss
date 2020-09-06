@@ -1,9 +1,9 @@
 @import './variables';
 @import './mixins';
 @import './fonts';
-@import './search';
-@import './results';
-@import './nominations';
+@import '../components/Movies/search';
+@import '../components//MovieList/results';
+@import '../components//Nominations/nominations';
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -13,8 +13,25 @@
     background: #4056A1;
 }
 
+.header {
+    background: #4056A1;
+
+    &__banner {
+        @include heading;
+        font-size: 1rem;
+        color: $primary-color-5;
+        text-align: center;
+        padding: 1rem;
+
+        @include tablet {
+            padding-top: 2rem;
+            font-size: 1.5rem;
+        }
+    }
+}
+
 .main {
-    padding: 2rem;
+    padding: 0 2rem 2rem;
     display: flex;
     flex-direction: column;
 

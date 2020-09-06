@@ -10,6 +10,7 @@ class Movies extends React.Component {
         query: '',
         movie: [],
         nominations: [],
+        banner: false,
     }
 
     handleInput = (event) => {
@@ -41,8 +42,18 @@ class Movies extends React.Component {
         })
 
         this.setState({
-            nominations: nominations
+            nominations: nominations,
         })
+
+        if(nominations.length === 5) {
+            this.setState({
+                banner: true,
+            })
+        } else {
+            this.setState({
+                banner: false,
+            })
+        }
     }
     
     removeMovie = (selectedNomination) => {
@@ -56,6 +67,10 @@ class Movies extends React.Component {
     render() {
         return (
             <>
+            <header className='header'>
+                <h2 className='header__banner'>{!this.state.banner ? '' : "You've selected your 5 nominations!"}</h2>
+            </header>
+
             <main className='main'>
                 <h1 className='main__title'>THE SHOPPIES</h1>
 
@@ -70,7 +85,7 @@ class Movies extends React.Component {
                     {this.state.movie.map(movie => 
                     <>
                     <MovieList movie={movie} key={movie.imdbID} />
-                    <button onClick={this.addMovie} value={movie.Title + ` (${movie.Year})`} className='results__btn'>Nominate</button>
+                    <button onClick={this.addMovie} value={movie.Title + ` (${movie.Year})`}  className='results__btn'>Nominate</button>
                     </>
                     )} 
                 </section>
@@ -80,7 +95,7 @@ class Movies extends React.Component {
                     {this.state.nominations.map(nominations =>
                         <>
                         <Nominations nominations={nominations}/>
-                        <button onClick={() => this.removeMovie(nominations.movie)} className='nominations__btn' >Remove</button>
+                        <button onClick={() => this.removeMovie(nominations.movie)} className='nominations__btn'>Remove</button>
                         </>
                     )}
                 </section>
