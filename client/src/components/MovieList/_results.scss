@@ -5,14 +5,21 @@
         font-weight: normal;
         font-size: 0.9rem;
         padding: 2rem 0 0.5rem;
-
+        
         @include tablet {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
         }
     }
 
-    &__list {
+    &__item {
 
+        @include tablet {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
     }
 
     &__list-item {
@@ -23,6 +30,9 @@
         @include tablet {
             font-size: 1.5rem;
             padding: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 31.25rem;
         }
     }
 
@@ -32,10 +42,11 @@
 
         @include tablet {
             @include tablet-btn;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0rem;
             text-transform: uppercase;
             font-size: 1rem;
             font-weight: bold;
+            height: 3.38rem;
         }
     }
 }

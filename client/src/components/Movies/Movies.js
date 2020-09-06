@@ -74,28 +74,34 @@ class Movies extends React.Component {
             <main className='main'>
                 <h1 className='main__title'>THE SHOPPIES</h1>
 
-                <section className='search__container'>
+                <section className='search'>
                     <label className='search__label'>Find A Movie</label>
-                    <input type='text' onChange={this.handleInput} className='search__search'/>
-                    <button onClick={this.submitInput} className='search__btn'>Search</button>
+                    <div className='search__container'>
+                        <input type='text' onChange={this.handleInput} className='search__search'/>
+                        <button onClick={this.submitInput} className='search__btn'>Search</button>
+                    </div>
                 </section>
 
-                <section className='results__container'>
+                <section className='results'>
                     <h3 className='results__title'>Results for {this.state.query}</h3>
                     {this.state.movie.map(movie => 
                     <>
-                    <MovieList movie={movie} key={movie.imdbID} />
-                    <button onClick={this.addMovie} value={movie.Title + ` (${movie.Year})`}  className='results__btn'>Nominate</button>
+                    <div className='results__item'>
+                        <MovieList movie={movie} key={movie.imdbID}/>
+                        <button onClick={this.addMovie} value={movie.Title + ` (${movie.Year})`}  className='results__btn'>Nominate</button>
+                    </div>
                     </>
                     )} 
                 </section>
 
-                <section className='nominations__container'>
+                <section className='nominations'>
                     <h2 className='nominations__title'>Nominations</h2>
                     {this.state.nominations.map(nominations =>
                         <>
-                        <Nominations nominations={nominations}/>
-                        <button onClick={() => this.removeMovie(nominations.movie)} className='nominations__btn'>Remove</button>
+                        <div className='nominations__container'>
+                            <Nominations nominations={nominations}/>
+                            <button onClick={() => this.removeMovie(nominations.movie)} className='nominations__btn'>Remove</button>
+                        </div>
                         </>
                     )}
                 </section>

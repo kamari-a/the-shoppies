@@ -10,11 +10,11 @@
     margin: 0;
     padding: 0;
     font-size: 16px;
-    background: #4056A1;
+    background: $primary-color-1;
 }
 
 .header {
-    background: #4056A1;
+    background: $primary-color-1;
 
     &__banner {
         @include heading;
@@ -37,6 +37,10 @@
 
     @include tablet {
         padding: 3rem;
+    }
+
+    @include desktop {
+        padding: 3rem 10rem;
     }
 
     &__title {
