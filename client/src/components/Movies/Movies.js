@@ -35,7 +35,7 @@ class Movies extends React.Component {
     addMovie = (event) => {
         event.preventDefault();
 
-        const nominations = this.state.nominations.slice();
+        const nominations = this.state.nominations;
         nominations.push({
             'movie': event.target.value,
         })
@@ -45,19 +45,11 @@ class Movies extends React.Component {
         })
     }
     
-    removeMovie = (event) => {
-        event.preventDefault();
- 
-        const nominations = this.state.nominations.slice()
-
-        //currently removes the last item from the array - needs to be fixed to remove the matching id
-        nominations.pop({
-            'title': event.target.value.Title,
-            'year': event.target.value.Year
-        })
+    removeMovie = (selectedNomination) => {
+        const deletedNomination = this.state.nominations.filter(nomination => nomination.movie !== selectedNomination);
 
         this.setState({
-            nominations: nominations
+            nominations: deletedNomination
         })
     }
 
@@ -88,7 +80,7 @@ class Movies extends React.Component {
                     {this.state.nominations.map(nominations =>
                         <>
                         <Nominations nominations={nominations}/>
-                        <button onClick={this.removeMovie} className='nominations__btn' >Remove</button>
+                        <button onClick={() => this.removeMovie(nominations.movie)} className='nominations__btn' >Remove</button>
                         </>
                     )}
                 </section>
