@@ -12,14 +12,12 @@ class Movies extends React.Component {
         nominations: [],
     }
 
-    //listens to what is typed in the search bar
     handleInput = (event) => {
         this.setState({
             query: event.target.value
         })
     }
     
-    //submits movie title typed in to search bar
     submitInput = (event) => {
         event.preventDefault();
         axios
@@ -36,31 +34,36 @@ class Movies extends React.Component {
 
     addMovie = (event) => {
         event.preventDefault();
-        console.log(this.state.movie)
+
+        const nominations = this.state.nominations.slice();
+        nominations.push({
+            'movie': event.target.value,
+        })
+
         this.setState({
-            //currently adds an item to the end of the nominations array but will replace content with the new item, rather than appending this
-            nominations: 
-            [
-                {
-                    'title': this.state.movie[0].Title,
-                    'year': this.state.movie[0].Year
-                }
-            ]
+            nominations: nominations
         })
     }
     
     removeMovie = (event) => {
         event.preventDefault();
-        //currently clears the nominations array but will need to be set up to clear only the selected item
+ 
+        const nominations = this.state.nominations.slice()
+
+        //currently removes the last item from the array - needs to be fixed to remove the matching id
+        nominations.pop({
+            'title': event.target.value.Title,
+            'year': event.target.value.Year
+        })
+
         this.setState({
-            nominations: []
+            nominations: nominations
         })
     }
 
     render() {
         return (
             <>
-
             <main className='main'>
                 <h1 className='main__title'>THE SHOPPIES</h1>
 
@@ -74,8 +77,8 @@ class Movies extends React.Component {
                     <h3 className='results__title'>Results for {this.state.query}</h3>
                     {this.state.movie.map(movie => 
                     <>
-                    <MovieList movie={movie} key={movie.imdbID}/>
-                    <button onClick={this.addMovie} className='results__btn'>Nominate</button>
+                    <MovieList movie={movie} key={movie.imdbID} />
+                    <button onClick={this.addMovie} value={movie.Title + ` (${movie.Year})`} className='results__btn'>Nominate</button>
                     </>
                     )} 
                 </section>
@@ -85,13 +88,11 @@ class Movies extends React.Component {
                     {this.state.nominations.map(nominations =>
                         <>
                         <Nominations nominations={nominations}/>
-                        
                         <button onClick={this.removeMovie} className='nominations__btn' >Remove</button>
                         </>
                     )}
                 </section>
             </main>
- 
             </>
         )
     }
