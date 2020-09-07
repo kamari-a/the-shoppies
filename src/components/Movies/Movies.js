@@ -10,7 +10,7 @@ class Movies extends React.Component {
         query: '',
         movie: [],
         nominations: [],
-        banner: false,
+        banner: false
     }
 
     handleInput = (event) => {
@@ -34,9 +34,8 @@ class Movies extends React.Component {
     }
 
     addMovie = (event) => {
-        event.preventDefault();
-
         const nominations = this.state.nominations;
+
         nominations.push({
             'movie': event.target.value,
         })
@@ -60,15 +59,25 @@ class Movies extends React.Component {
         const deletedNomination = this.state.nominations.filter(nomination => nomination.movie !== selectedNomination);
 
         this.setState({
-            nominations: deletedNomination
+            nominations: deletedNomination,
         })
+
+        if(deletedNomination.length === 5) {
+            this.setState({
+                banner: true,
+            })
+        } else {
+            this.setState({
+                banner: false,
+            })
+        }
     }
 
     render() {
         return (
             <>
             <header className='header'>
-                <h2 className='header__banner'>{!this.state.banner ? '' : "You've selected your 5 nominations!"}</h2>
+                <h2 className='header__banner'>{!this.state.banner ? '' : "You've selected your 5 nominations. Thank you for participating in the Shoppies!"}</h2>
             </header>
 
             <main className='main'>
@@ -84,25 +93,26 @@ class Movies extends React.Component {
 
                 <section className='results'>
                     <h3 className='results__title'>Results for {this.state.query}</h3>
+                    
                     {this.state.movie.map(movie => 
-                    <>
-                    <div className='results__item'>
-                        <MovieList movie={movie} key={movie.imdbID}/>
-                        <button onClick={this.addMovie} value={movie.Title + ` (${movie.Year})`}  className='results__btn'>Nominate</button>
-                    </div>
-                    </>
+                        <div className='results__item'>
+                            <MovieList movie={movie} key={movie.imdbID}/>
+                            <button onClick={this.addMovie} 
+                            value={movie.Title + ` (${movie.Year})`}  
+                            className='results__btn'>Nominate</button>
+                        </div>
                     )} 
                 </section>
 
                 <section className='nominations'>
                     <h2 className='nominations__title'>Nominations</h2>
+
                     {this.state.nominations.map(nominations =>
-                        <>
                         <div className='nominations__container'>
                             <Nominations nominations={nominations}/>
-                            <button onClick={() => this.removeMovie(nominations.movie)} className='nominations__btn'>Remove</button>
+                            <button onClick={() => this.removeMovie(nominations.movie)} 
+                            className='nominations__btn'>Remove</button>
                         </div>
-                        </>
                     )}
                 </section>
             </main>
