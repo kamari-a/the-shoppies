@@ -8,6 +8,6 @@ The Shoppies is a responsive web application built using React.js, which allows 
 - users can search for their favourite movies
 - users can add movies to the nomination list
 - users can remove movies from the nomination list
-- when users have selected five movies, they are notified
+- when users have selected five movies, they are notified that they have made their selection
 
 

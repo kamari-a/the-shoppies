@@ -44,7 +44,7 @@ class Movies extends React.Component {
             nominations: nominations,
         })
 
-        if(nominations.length === 5) {
+        if(nominations.length === 5){
             this.setState({
                 banner: true,
             })
@@ -54,7 +54,7 @@ class Movies extends React.Component {
             })
         }
     }
-    
+
     removeMovie = (selectedNomination) => {
         const deletedNomination = this.state.nominations.filter(nomination => nomination.movie !== selectedNomination);
 
@@ -62,7 +62,7 @@ class Movies extends React.Component {
             nominations: deletedNomination,
         })
 
-        if(deletedNomination.length === 5) {
+        if(deletedNomination.length === 5){
             this.setState({
                 banner: true,
             })
@@ -77,7 +77,7 @@ class Movies extends React.Component {
         return (
             <>
             <header className='header'>
-                <h2 className='header__banner'>{!this.state.banner ? '' : "You've selected your 5 nominations. Thank you for participating in the Shoppies!"}</h2>
+                <h2 className='header__banner'>{!this.state.banner ? '' : "You've selected your 5 nominations. Thank you for participating in The Shoppies!"}</h2>
             </header>
 
             <main className='main'>
