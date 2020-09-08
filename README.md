@@ -11,3 +11,4 @@ The Shoppies is a responsive web application built using React.js, which allows 
 - when users have selected five movies, they are notified that they have made their selection
 
 
+You can access the application by running 'npm start' or by clicking here: 'https://cranky-heyrovsky-bc0e86.netlify.app/'
